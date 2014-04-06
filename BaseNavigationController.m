@@ -51,9 +51,8 @@
     [self loadThemeImage];
 }
 - (void)loadThemeImage {
-        UIImage *image = [[ThemeManger shareInstance] getThemeImage:@"Bake.png"];
+        UIImage *image = [[ThemeManger shareInstance] getThemeImage:@"navigationbar_background.png"];
         [self.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-    
 }
 
 - (void)didReceiveMemoryWarning

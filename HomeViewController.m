@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "UIFactory.h"
+#import "HospIntroViewController.h"
 #import "DoctorIntroViewController.h"
 
 @interface HomeViewController ()
@@ -66,14 +67,14 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = @"推荐医院";
         cell.detailTextLabel.text = @"选择进入医院详情";
-        [cell.imageView setImage:[UIImage imageNamed:@"page_image_loading.png"]];
+        [cell.imageView setImage:[UIImage imageNamed:@"default_hospital_cell.png"]];
     }
     else if(indexPath.section == 0 &&indexPath.row == 1)
     {
          cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = @"热门医师";
         cell.detailTextLabel.text = @"选择进入医生详情";
-        [cell.imageView setImage:[UIImage imageNamed:@"page_image_loading.png"]];
+        [cell.imageView setImage:[UIImage imageNamed:@"default_hospital_cell.png"]];
 
     }
     else if(indexPath.section == 1 &&indexPath.row == 0){
@@ -113,7 +114,11 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 &&indexPath.row == 0) {
-        DoctorIntroViewController *doctor = [[DoctorIntroViewController alloc] init];
+        HospIntroViewController *hospital = [[HospIntroViewController alloc] init];
+        [self.navigationController pushViewController:hospital animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }else if(indexPath.section == 0 && indexPath.row == 1){
+        DoctorIntroViewController *doctor = [[DoctorIntroViewController alloc]init];
         [self.navigationController pushViewController:doctor animated:YES];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
