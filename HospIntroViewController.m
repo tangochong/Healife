@@ -48,16 +48,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
-//    PFObject *Hospitals = (PFObject *)self.HospitalArray;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identify];
-//            PFFile *image = (PFFile *)[Hospitals objectForKey:@"HoImage"];
-//        
-//            cell.imageView.image =[UIImage imageWithData:image.getData];
-//            NSLog(@"%@",image);
-       cell.textLabel.text =  [_HospitalNames objectAtIndex:indexPath.row];
-//        NSLog(@"is %@",[_HospitalNames objectAtIndex:indexPath.row]);
-
+        PFObject *hobject = [self.HospitalArray objectAtIndex:indexPath.row];
+        //网络加载图片
+//        PFFile *image = (PFFile *)[hobject objectForKey:@"HoImage"];
+//        cell.imageView.image =[UIImage imageWithData:image.getData];
+        cell.textLabel.text = [hobject objectForKey:@"HoName"];
     }
         return cell;
 }
@@ -67,12 +64,12 @@
     [query orderByDescending:@"createAt"];
     _HospitalNames = [[NSMutableArray alloc] init];
     self.HospitalArray =   [query findObjects];
-    for (PFObject *hospiobject in self.HospitalArray) {
-        NSString *name = [hospiobject objectForKey:@"About"];
-        NSLog(@"object:%@",hospiobject);
-        [_HospitalNames  addObject:name];
-        NSLog(@"names:%@",_HospitalNames);
-    }
+//    for (PFObject *hospiobject in self.HospitalArray) {
+//        NSString *name = [hospiobject objectForKey:@"About"];
+//        NSLog(@"object:%@",hospiobject);
+//        [_HospitalNames  addObject:name];
+//        NSLog(@"names:%@",_HospitalNames);
+//    }
 }
 
 - (void)didReceiveMemoryWarning
