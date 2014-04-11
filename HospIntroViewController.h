@@ -11,5 +11,5 @@
 @interface HospIntroViewController : BaseViewController<UITableViewDataSource,UITabBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *HosIntroName;
 @property (nonatomic,retain) NSArray *HospitalArray;
-@property (nonatomic,retain) NSMutableArray *HospitalNames;
+//@property (nonatomic,retain) NSMutableArray *HospitalNames;
 @end

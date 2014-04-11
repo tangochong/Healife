@@ -9,8 +9,7 @@
 #import "HomeViewController.h"
 #import "UIFactory.h"
 #import "HospIntroViewController.h"
-#import "DoctorIntroViewController.h"
-
+#import "DocIntroViewController.h"
 @interface HomeViewController ()
 
 @end
@@ -118,7 +117,7 @@
         [self.navigationController pushViewController:hospital animated:YES];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }else if(indexPath.section == 0 && indexPath.row == 1){
-        DoctorIntroViewController *doctor = [[DoctorIntroViewController alloc]init];
+        DocIntroViewController *doctor = [[DocIntroViewController alloc]init];
         [self.navigationController pushViewController:doctor animated:YES];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
