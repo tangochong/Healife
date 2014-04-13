@@ -35,12 +35,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
--(void) viewWillAppear:(BOOL)animated
-{
     [super showHUD:@"正在加载..." isDim:YES];
     [self getHospitalsName];
+    
+    // Do any additional setup after loading the view from its nib.
+}
+
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

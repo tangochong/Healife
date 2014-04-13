@@ -10,6 +10,7 @@
 #import "UIFactory.h"
 #import "HospIntroViewController.h"
 #import "DocIntroViewController.h"
+#import "NerveAreaSelectorViewController.h"
 @interface HomeViewController ()
 
 @end
@@ -40,6 +41,7 @@
 //    mySearchBar.delegate = self;
 //    [self.view addSubview:mySearchBar];
 }
+
 -(void)getlocation
 {
     NSLog(@"定位");
@@ -119,6 +121,10 @@
     }else if(indexPath.section == 0 && indexPath.row == 1){
         DocIntroViewController *doctor = [[DocIntroViewController alloc]init];
         [self.navigationController pushViewController:doctor animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }else if(indexPath.section == 1 && indexPath.row == 0){
+        NerveAreaSelectorViewController *nerveArea = [[NerveAreaSelectorViewController alloc]init];
+        [self.navigationController pushViewController:nerveArea animated:YES];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
