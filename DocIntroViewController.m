@@ -22,6 +22,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.title = @"推荐医师";
         // Custom initialization
     }
     return self;
@@ -30,18 +31,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view from its nib.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super showHUD:@"正在加载...." isDim:YES];
     [self getDoctorNames];
 }
 
 -(void)getDoctorNames{
     PFQuery *query = [PFQuery queryWithClassName:@"Doctors"];
-    [query orderByDescending:@"createAt"];
-    NSLog(@"%@",query);
+    [query orderByAscending:@"createAt"];
     self.DoctorsArray =   [query findObjects];
+    [super hideHUD];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -50,20 +53,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identify];
-        PFObject *hobject = [self.DoctorsArray objectAtIndex:indexPath.row];
-        //网络加载图片
-        PFFile *image = (PFFile *)[hobject objectForKey:@"image"];
-        cell.imageView.image =[UIImage imageWithData:image.getData];
-        cell.textLabel.text = [hobject objectForKey:@"Name"];
-        cell.detailTextLabel.text = [ hobject objectForKey:@"About"];
-
     }
+    PFObject *hobject = [self.DoctorsArray objectAtIndex:indexPath.row];
+    //网络加载图片
+    
+    PFFile *image = (PFFile *)[hobject objectForKey:@"image"];
+    cell.imageView.image =[UIImage imageWithData:image.getData];
+    cell.textLabel.text = [hobject objectForKey:@"Name"];
+    cell.detailTextLabel.text = [ hobject objectForKey:@"About"];
     return cell;
+    
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

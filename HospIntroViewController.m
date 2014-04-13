@@ -24,6 +24,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"推荐医院";
     }
     return self;
 }
@@ -38,6 +39,7 @@
 }
 -(void) viewWillAppear:(BOOL)animated
 {
+    [super showHUD:@"正在加载..." isDim:YES];
     [self getHospitalsName];
 }
 
@@ -50,14 +52,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identify];
-        PFObject *hobject = [self.HospitalArray objectAtIndex:indexPath.row];
-        //网络加载图片
-        PFFile *image = (PFFile *)[hobject objectForKey:@"HoImage"];
-        cell.imageView.image =[UIImage imageWithData:image.getData];
-        cell.textLabel.text = [hobject objectForKey:@"HoName"];
-        cell.detailTextLabel.text = [ hobject objectForKey:@"About"];
     }
-        return cell;
+    PFObject *hobject = [self.HospitalArray objectAtIndex:indexPath.row];
+    //网络加载图片
+    PFFile *image = (PFFile *)[hobject objectForKey:@"HoImage"];
+    cell.imageView.image =[UIImage imageWithData:image.getData];
+    cell.textLabel.text = [hobject objectForKey:@"HoName"];
+    cell.detailTextLabel.text = [ hobject objectForKey:@"About"];
+    return cell;
 }
 
 -(void) getHospitalsName{
@@ -71,6 +73,7 @@
 //        [_HospitalNames  addObject:name];
 //        NSLog(@"names:%@",_HospitalNames);
 //    }
+      [super hideHUD];
 }
 
 - (void)didReceiveMemoryWarning

@@ -10,5 +10,5 @@
 
 @interface DocIntroViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *DocTableView;
-@property (nonatomic,retain) NSArray *DoctorsArray;
+@property (nonatomic,retain) NSArray  *DoctorsArray;
 @end
