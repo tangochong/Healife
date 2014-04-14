@@ -35,19 +35,19 @@
     
     selectType = PROVINCE;
     self.navigationController.navigationBarHidden = NO;
-    self.title = @"ssss";
+    self.title = @"地区选择";
     
     
-    UIBarButtonItem* leftB = [[UIBarButtonItem alloc] init];
-    leftB.title = @"ss";
-    self.navigationItem.backBarButtonItem = leftB;
+//    UIBarButtonItem* leftB = [[UIBarButtonItem alloc] init];
+//    leftB.title = @"ss";
+//    self.navigationItem.backBarButtonItem = leftB;
     
     return self;
 }
 
 -(void) readData{
     provinces = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ProvincesAndCities.plist" ofType:nil]];
-    NSLog(@"tt%@",province);
+    NSLog(@"地区:%@",province);
     
     
 }
@@ -188,6 +188,7 @@
 
 - (IBAction)okCannelBtnClick:(id)sender {
     [delegate onAreaCannel];
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (IBAction)exitInput:(id)sender {

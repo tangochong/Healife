@@ -35,9 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [super showHUD:@"正在加载..." isDim:YES];
     [self getHospitalsName];
-    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -69,15 +67,15 @@
 -(void) getHospitalsName{
     PFQuery *query = [PFQuery queryWithClassName:@"Hospitals"];
     [query orderByDescending:@"createAt"];
-//    _HospitalNames = [[NSMutableArray alloc] init];
-    self.HospitalArray =   [query findObjects];
-//    for (PFObject *hospiobject in self.HospitalArray) {
-//        NSString *name = [hospiobject objectForKey:@"About"];
-//        NSLog(@"object:%@",hospiobject);
-//        [_HospitalNames  addObject:name];
-//        NSLog(@"names:%@",_HospitalNames);
-//    }
-      [super hideHUD];
+    [super showHUD:@"正在加载..." isDim:YES];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *object,NSError *error){
+        self.HospitalArray = object;
+        [super hideHUD];
+        [self.HosIntroName reloadData];
+        
+    }];
+//    self.HospitalArray =   [query findObjects];
+    
 }
 
 - (void)didReceiveMemoryWarning

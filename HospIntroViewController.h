@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface HospIntroViewController : BaseViewController<UITableViewDataSource,UITabBarDelegate>
+@interface HospIntroViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *HosIntroName;
 @property (nonatomic,retain) NSArray *HospitalArray;
 //@property (nonatomic,retain) NSMutableArray *HospitalNames;

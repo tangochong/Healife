@@ -36,15 +36,19 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [super showHUD:@"正在加载...." isDim:YES];
     [self getDoctorNames];
 }
 
 -(void)getDoctorNames{
     PFQuery *query = [PFQuery queryWithClassName:@"Doctors"];
     [query orderByAscending:@"createAt"];
-    self.DoctorsArray =   [query findObjects];
-    [super hideHUD];
+    [super showHUD:@"正在加载...." isDim:YES];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *object,NSError *error){
+        self.DoctorsArray = object;
+        [self.DocTableView reloadData];
+        [super hideHUD];
+    }];
+//    self.DoctorsArray =   [query findObjects];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
