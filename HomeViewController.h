@@ -7,8 +7,9 @@
 //
 
 #import "BaseViewController.h"
+#import "NerveAreaSelectorViewController.h"
 
-@interface HomeViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
+@interface HomeViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,NerveAreaSelectDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *DoctorNav;
 
 

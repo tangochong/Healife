@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 typedef enum {
     PROVINCE,
     CITY,
@@ -23,6 +24,7 @@ typedef enum {
 @optional
 - (void)onAreaSelect:(NSString *)selectValue;
 - (void)onAreaCannel;
+-(void) changeLabelText:(NSString *)text;
 @end
 
 @interface NerveAreaSelectorViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>{
@@ -32,9 +34,10 @@ typedef enum {
     
     NSInteger selectType;//当前的选择类型，省，市，区
     
-    id<NerveAreaSelectDelegate> delegate;
+    
 }
 
+@property (nonatomic,assign) id<NerveAreaSelectDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITextField *areaTX;
 @property (weak, nonatomic) IBOutlet UITableView *areaTableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *okBtn;

@@ -29,7 +29,7 @@
 }
 
 -(id)initWithDelegate:(id<NerveAreaSelectDelegate>)targetDelegate{
-    delegate = targetDelegate;
+   self.delegate = targetDelegate;
     
     [self readData];
     
@@ -61,7 +61,7 @@
     city = @"";
     area = @"";
     selectType = PROVINCE;
-    [self initWithDelegate:delegate];
+    [self initWithDelegate:self.delegate];
 }
 
 - (void)didReceiveMemoryWarning
@@ -182,16 +182,24 @@
 }
 - (IBAction)onOkBtnClick:(id)sender {
     NSLog(@"OK click");
-    [delegate onAreaSelect:areaTX.text];
-    [self dismissViewControllerAnimated:YES completion:NULL];
+//    if ([self.delegate respondsToSelector:@selector(changeLabelText:)]) {
+        [self.delegate changeLabelText:areaTX.text];
+//    }
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)okCannelBtnClick:(id)sender {
-    [delegate onAreaCannel];
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+
 }
 
 - (IBAction)exitInput:(id)sender {
     [sender resignFirstResponder];
 }
+
 @end

@@ -46,7 +46,7 @@ typedef enum {
     CGFloat _panOriginX;
     CGPoint _panVelocity;
     DDMenuPanDirection _panDirection;
-
+    
     struct {
         unsigned int respondsToWillShowViewController:1;
         unsigned int showingLeftView:1;
@@ -78,6 +78,6 @@ typedef enum {
 
 @end
 
-@protocol DDMenuControllerDelegate 
+@protocol DDMenuControllerDelegate
 - (void)menuController:(DDMenuController*)controller willShowViewController:(UIViewController*)controller;
 @end

@@ -22,7 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-//        self.title = @"主页";
+//        self.title = @"针灸推拿预约";
     }
     return self;
 }
@@ -92,8 +92,8 @@
     }
     else if(indexPath.section == 1 &&indexPath.row == 2){
          cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = @"科室选择";
-        cell.detailTextLabel.text = @"选择医院科室";
+        cell.textLabel.text = @"医师选择";
+        cell.detailTextLabel.text = @"选择医院医师";
         [cell.imageView setImage:[UIImage imageNamed:@"page_image_loading.png"]];
     }
 
@@ -124,11 +124,19 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }else if(indexPath.section == 1 && indexPath.row == 0){
         NerveAreaSelectorViewController *nerveArea = [[NerveAreaSelectorViewController alloc]init];
-        [self.navigationController pushViewController:nerveArea animated:YES];
+        nerveArea.delegate = self;
+        [self presentViewController:nerveArea animated:YES completion:^{
+            NSLog(@"call back");
+        }];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 //    
 //}
+
+#pragma neverdelegate
+-(void)changeLabelText:(NSString *)text{
+    NSLog(@"dd%@",text);
+}
 @end
