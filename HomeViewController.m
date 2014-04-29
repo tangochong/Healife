@@ -11,11 +11,18 @@
 #import "HospIntroViewController.h"
 #import "DocIntroViewController.h"
 #import "NerveAreaSelectorViewController.h"
+#import "HosSelectedViewController.h"
+#import "DocSelectedViewController.h"
+
 @interface HomeViewController ()
+
 
 @end
 
+
 @implementation HomeViewController
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,16 +37,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    _AreaName = @"地区选择";
+    _selectArea = @"选择就医地点";
+    _hospitalName = @"医院选择";
+    _selectHosName = @"选择就医医院";
+    _docseName = @"医师选择";
+    // ;Do any additional setup after loading the view from its nib.
    UIButton *locationBut = [UIFactory createButtonWithBackground:@"compose_locatebutton_background.png" backgroundHighlighted:@"compose_locatebutton_background_highlighted.png"];
     locationBut.frame = CGRectMake(0, 0, 34, 27);
     [locationBut addTarget:self action:@selector(getlocation) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *locationItem = [[UIBarButtonItem alloc] initWithCustomView:locationBut];
     self.navigationItem.leftBarButtonItem =locationItem;
-//    UISearchBar *mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(40, 69, 260, 27)];
-//    
-//    mySearchBar.delegate = self;
-//    [self.view addSubview:mySearchBar];
 }
 
 -(void)getlocation
@@ -80,14 +89,14 @@
     }
     else if(indexPath.section == 1 &&indexPath.row == 0){
          cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = @"地区选择";
-        cell.detailTextLabel.text = @"选择就医地点";
+        cell.textLabel.text = _AreaName;
+        cell.detailTextLabel.text = _selectArea;
         [cell.imageView setImage:[UIImage imageNamed:@"page_image_loading.png"]];
     }
     else if(indexPath.section == 1 &&indexPath.row == 1){
          cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = @"医院选择";
-        cell.detailTextLabel.text = @"选择就医医院";
+        cell.textLabel.text = _hospitalName;
+        cell.detailTextLabel.text = _selectHosName;
         [cell.imageView setImage:[UIImage imageNamed:@"page_image_loading.png"]];
     }
     else if(indexPath.section == 1 &&indexPath.row == 2){
@@ -129,6 +138,29 @@
             NSLog(@"call back");
         }];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else if (indexPath.section == 1 && indexPath.row == 1){
+        if ([_AreaName isEqualToString:@"地区选择"]) {
+            UIAlertView *selectalert =[[UIAlertView alloc]initWithTitle:@"警告" message:@"您还没有选择地区！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [selectalert show];
+        } else{
+            HosSelectedViewController *hoselect  = [[HosSelectedViewController alloc] init];
+            hoselect.AreaName = _AreaName;
+            hoselect.selectArea = _selectArea;
+            hoselect.delegate = self;
+            [self.navigationController pushViewController:hoselect animated:YES];
+        }
+       
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else if (indexPath.section == 1 && indexPath.row == 2){
+        if ([_docseName  isEqualToString:@"医师选择"]) {
+            UIAlertView *selectalert =[[UIAlertView alloc]initWithTitle:@"警告" message:@"您还没有选择医院！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [selectalert show];
+        } else{
+        DocSelectedViewController *docse = [[DocSelectedViewController alloc]init];
+        docse.hospitalName = _hospitalName;
+        [self.navigationController pushViewController:docse animated:YES];
+        }
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -137,6 +169,25 @@
 
 #pragma neverdelegate
 -(void)changeLabelText:(NSString *)text{
-    NSLog(@"dd%@",text);
+    NSLog(@"%@",text);
+    if (text != nil) {
+        NSArray *array = [text componentsSeparatedByString:@" "];
+        _AreaName = [array objectAtIndex:0];
+        _selectArea = [array objectAtIndex:1];
+        [self.DoctorNav reloadData];
+    }
+   
 }
+-(void) getHospitalName:(NSString *) name :(NSString *) about
+{
+    NSLog(@"%@",name);
+    if (name != nil) {
+        _hospitalName = name;
+        _selectHosName = about;
+        [self.DoctorNav reloadData];
+    }
+
+}
+
+
 @end

@@ -181,14 +181,17 @@
     [super viewDidUnload];
 }
 - (IBAction)onOkBtnClick:(id)sender {
-    NSLog(@"OK click");
-//    if ([self.delegate respondsToSelector:@selector(changeLabelText:)]) {
-        [self.delegate changeLabelText:areaTX.text];
-//    }
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-//    [self.navigationController popViewControllerAnimated:YES];
+    if ([areaTX.text isEqualToString:@""]) {
+        UIAlertView *error  =[[UIAlertView alloc]initWithTitle:@"错误" message:@"您还没有选择地区" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [error show];
+           }else{
+               [self.delegate changeLabelText:areaTX.text];
+               [self dismissViewControllerAnimated:YES completion:^{
+                   
+               }];
+
+    }
+    //    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)okCannelBtnClick:(id)sender {
