@@ -13,6 +13,7 @@
 
 @interface HomeViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,NerveAreaSelectDelegate,HospitalSeDelegate>{
 }
+@property (weak, nonatomic) IBOutlet UISearchBar *search;
 @property (weak, nonatomic) IBOutlet UITableView *DoctorNav;
 
 //选择省市

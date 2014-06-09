@@ -1,23 +1,24 @@
 //
-//  LeftViewController.m
+//  DetailTitleViewController.m
 //  Healife
 //
-//  Created by zoro on 14-3-24.
+//  Created by zoro on 14-5-26.
 //  Copyright (c) 2014年 zoro. All rights reserved.
 //
 
-#import "LeftViewController.h"
+#import "DetailTitleViewController.h"
 
-@interface LeftViewController ()
+@interface DetailTitleViewController ()
 
 @end
 
-@implementation LeftViewController
+@implementation DetailTitleViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.title = @"健康大讲堂";
         // Custom initialization
     }
     return self;
@@ -27,7 +28,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.view.backgroundColor = [UIColor blackColor];
 }
 
 - (void)didReceiveMemoryWarning

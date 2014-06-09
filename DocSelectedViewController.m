@@ -7,6 +7,7 @@
 //
 
 #import "DocSelectedViewController.h"
+#import "DoDetailViewController.h"
 #import  <Parse/Parse.h>
 @interface DocSelectedViewController ()
 
@@ -35,7 +36,8 @@
      [query whereKey:@"HoName" equalTo:self.hospitalName];
     [super showHUD:@"正在加载...." isDim:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *object,NSError *error){
-        self.seDoctorsArray = object;
+//        self.seDoctorsArray = object;
+        self.SeDoctorsArray = object;
         [self.DocSeViewCell reloadData];
         [super hideHUD];
     }];
@@ -59,8 +61,19 @@
     cell.imageView.image =[UIImage imageWithData:image.getData];
     cell.textLabel.text = [hobject objectForKey:@"Name"];
     cell.detailTextLabel.text = [ hobject objectForKey:@"About"];
+    self.Number = [[hobject objectForKey:@"Number"] intValue];
     return cell;
+}
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    PFObject *hobject = [self.SeDoctorsArray objectAtIndex:indexPath.row];
+    self.Number = [[hobject objectForKey:@"Number"] intValue];
+    self.Name = [hobject objectForKey:@"Name"];
+    DoDetailViewController *dodetail = [[DoDetailViewController alloc]init];
+    dodetail.Number = self.Number;
+    dodetail.Name = self.Name;
+    [self.navigationController pushViewController:dodetail animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

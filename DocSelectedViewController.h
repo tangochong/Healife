@@ -12,4 +12,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *DocSeViewCell;
 @property (nonatomic,retain) NSArray  *SeDoctorsArray;
 @property (nonatomic,retain)   NSString *hospitalName;
+@property (nonatomic,assign) int Number;
+@property (nonatomic,retain) NSString *Name;
 @end

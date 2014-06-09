@@ -19,6 +19,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.title = @"设置";
         // Custom initialization
     }
     return self;
@@ -32,25 +33,44 @@
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    if (section == 0) {
+        return 1;
+    }
+    else if (section == 1){
+        return 3;
+    } else if (section == 2){
+        return 3;
+    } else
+    {
+        return 1;
+    }
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    if (indexPath.row == 0) {
-        cell.textLabel.text = @"账号设置";
+    if (indexPath.row==0 &&indexPath.section == 0) {
+        cell.textLabel.text = @"我的预约单";
     }
-    else if(indexPath.row == 1){
+    else if(indexPath.section == 1 && indexPath.row == 0){
+        cell.textLabel.text = @"就诊人管理";
+    }else if(indexPath.section == 1&&indexPath.row == 1){
+        cell.textLabel.text = @"账号信息";
+    }else if (indexPath.section == 1&&indexPath.row == 2){
         cell.textLabel.text = @"修改密码";
-    }else if(indexPath.row == 2){
+    }else if (indexPath.section == 2 && indexPath.row == 0){
         cell.textLabel.text = @"意见反馈";
-    }else if (indexPath.row == 3){
-        cell.textLabel.text = @"登出";
+    }else if (indexPath.section == 2 && indexPath.row == 1){
+         cell.textLabel.text = @"给我们评分";
+    }else if (indexPath.section == 2 && indexPath.row == 2){
+         cell.textLabel.text = @"关于";
     }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
+    if (indexPath.section == 1&&indexPath.row == 1) {
         LoginViewController *loginView = [[LoginViewController alloc]init];
         [self.navigationController pushViewController:loginView animated:YES];
     }

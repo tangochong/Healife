@@ -29,7 +29,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-//        self.title = @"针灸推拿预约";
+        self.title = @"欢迎登录";
     }
     return self;
 }
@@ -37,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [self.search resignFirstResponder];
     _AreaName = @"地区选择";
     _selectArea = @"选择就医地点";
     _hospitalName = @"医院选择";
@@ -70,7 +70,9 @@
         return 3;
     }
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 70;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     if (indexPath.section == 0 &&indexPath.row == 0) {
@@ -91,19 +93,19 @@
          cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = _AreaName;
         cell.detailTextLabel.text = _selectArea;
-        [cell.imageView setImage:[UIImage imageNamed:@"page_image_loading.png"]];
+        [cell.imageView setImage:[UIImage imageNamed:@"default_hospital_cell.png"]];
     }
     else if(indexPath.section == 1 &&indexPath.row == 1){
          cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = _hospitalName;
         cell.detailTextLabel.text = _selectHosName;
-        [cell.imageView setImage:[UIImage imageNamed:@"page_image_loading.png"]];
+        [cell.imageView setImage:[UIImage imageNamed:@"default_hospital_cell.png"]];
     }
     else if(indexPath.section == 1 &&indexPath.row == 2){
          cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = @"医师选择";
         cell.detailTextLabel.text = @"选择医院医师";
-        [cell.imageView setImage:[UIImage imageNamed:@"page_image_loading.png"]];
+        [cell.imageView setImage:[UIImage imageNamed:@"default_hospital_cell.png"]];
     }
 
     return cell;
@@ -152,7 +154,7 @@
        
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     } else if (indexPath.section == 1 && indexPath.row == 2){
-        if ([_docseName  isEqualToString:@"医师选择"]) {
+        if ([_hospitalName  isEqualToString: @"医院选择"]) {
             UIAlertView *selectalert =[[UIAlertView alloc]initWithTitle:@"警告" message:@"您还没有选择医院！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [selectalert show];
         } else{

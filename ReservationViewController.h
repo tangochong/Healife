@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface ReservationViewController : BaseViewController
+@interface ReservationViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

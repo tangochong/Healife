@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface ProfileViewController : BaseViewController
+@interface ProfileViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *porfiletableview;
 
 @end

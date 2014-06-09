@@ -95,8 +95,8 @@
     UIImageView *tabbarGroundImage = [UIFactory createImageView:@"tabbar_background.png"];
     tabbarGroundImage.frame = _tabbarView.bounds;
     [_tabbarView addSubview:tabbarGroundImage];
-    NSArray *background = @[@"tabbar_home.png",@"tabbar_message_center.png",@"tabbar_profile.png",@"tabbar_more.png"];
-    NSArray *heightBackground = @[@"tabbar_home_highlighted.png",@"tabbar_message_center_highlighted.png",@"tabbar_profile_highlighted.png",@"tabbar_more_highlighted.png"];
+    NSArray *background = @[@"tabbar_home.png",@"tabbar_message_center.png",@"tabbar_profile2.png",@"tabbar_more.png"];
+    NSArray *heightBackground = @[@"tabbar_home_highlighted.png",@"tabbar_message_center_highlighted.png",@"tabbar_profile_highlighted2.png",@"tabbar_more_highlighted.png"];
     for (int i=0; i<background.count; i++) {
         NSString *backImage = background[i];
         NSString *heightImage = heightBackground[i];
